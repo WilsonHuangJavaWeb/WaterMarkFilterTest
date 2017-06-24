@@ -26,10 +26,12 @@ public class WaterMarkFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
 
+        //自訂的HttpServletResponseWrapper類別物件
         WaterMarkResponseWrapper waterMarkResponseWrapper = new WaterMarkResponseWrapper(response, waterMarkFile);
 
         chain.doFilter(request, waterMarkResponseWrapper);
 
+        //加上浮水印，並輸出到客戶端瀏覽器
         waterMarkResponseWrapper.finishResponse();
 
     }
